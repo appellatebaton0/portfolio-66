@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://by6wuphdptep"]
+
+[ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node" unique_id=59777334]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1660707798]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1815237079]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r150o")
+
+[node name="Backdrop2" type="Panel" parent="CanvasLayer/Control" unique_id=1923751320]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r150o")
+
+[node name="Text" type="Label" parent="CanvasLayer/Control/Backdrop2" unique_id=218249657]
+modulate = Color(1, 1, 1, 0.07058824)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 352.0
+offset_bottom = 265.0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||
+|||||||||||||||||||||||||||"
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=796943006]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 183.0
+offset_right = 287.0
+offset_bottom = 252.0
+theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
+bbcode_enabled = true
+text = "/----------\\
+<[color=#00000000]|||[/color]HAND[color=#00000000]|}|[/color]>
+<[color=#00000000]||||||||||[/color]>
+<[color=#00000000]||||||||||[/color]>
+\\----------/"
+fit_content = true
+
+[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Label" unique_id=1488998315]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 26.0
+offset_right = 131.0
+offset_bottom = 56.0
+bbcode_enabled = true
+text = "1234567890123456"
+fit_content = true
+
+[node name="Menu" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1140640963]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 14.0
+offset_right = 339.0
+offset_bottom = 213.0
+theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
+bbcode_enabled = true
+fit_content = true
+
+[node name="Stats" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1984262044]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 183.0
+offset_right = 339.0
+offset_bottom = 252.0
+theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
+bbcode_enabled = true
+text = "X----------x
+[ ]
+[ ]
+[ ]
+X----------X"
+fit_content = true
+horizontal_alignment = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Stats" unique_id=1938155772]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 13.0
+offset_right = 130.0
+offset_bottom = 53.0
+text = "HP:
+DRAW:
+DISC:
+"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Stats" unique_id=1163530763]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 13.0
+offset_right = 131.0
+offset_bottom = 56.0
+theme_override_constants/separation = -4
+
+[node name="HP" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1540622527]
+layout_mode = 2
+text = "000"
+
+[node name="Draw" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1306925801]
+layout_mode = 2
+text = "000"
+
+[node name="Discard" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1423412272]
+layout_mode = 2
+text = "000"
+
+[node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=447798131]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 261.0
+offset_bottom = 183.0
+theme_override_colors/default_color = Color(0.62352943, 0.62352943, 0.62352943, 1)
+text = "X-----------------X
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+[ ]
+X-----------------X"
+horizontal_alignment = 3
+
+[node name="RunStats" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=326261919]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 14.0
+offset_right = 339.0
+offset_bottom = 183.0
+theme_override_colors/default_color = Color(0.62352943, 0.62352943, 0.62352943, 1)
+text = "X---X
+
+
+
+
+
+
+
+
+
+
+X---X"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/RunStats" unique_id=1519447267]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 43.0
+text = "ESC
+MENU"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/RunStats" unique_id=1736524125]
+layout_mode = 0
+offset_top = 65.0
+offset_right = 52.0
+offset_bottom = 95.0
+text = "RoUnD
+00000
+
+SCORE
+00000"

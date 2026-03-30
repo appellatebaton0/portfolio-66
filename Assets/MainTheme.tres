@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://di3vsjt4ml06e"]
+
+[ext_resource type="FontFile" uid="uid://c3paeso1gwn84" path="res://Assets/Fonts/origa.ttf" id="1_gu0d2"]
+
+[sub_resource type="FontVariation" id="FontVariation_gu0d2"]
+base_font = ExtResource("1_gu0d2")
+
+[resource]
+Label/constants/line_spacing = -4
+Label/fonts/font = SubResource("FontVariation_gu0d2")
+RichTextLabel/constants/line_separation = -4
+RichTextLabel/fonts/normal_font = ExtResource("1_gu0d2")
