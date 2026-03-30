@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://by6wuphdptep"]
 
 [ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
+[ext_resource type="Script" uid="uid://bachjwacobdky" path="res://Scripts/Terminal.gd" id="2_kln2b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
 bg_color = Color(0, 0, 0, 1)
@@ -57,7 +58,16 @@ text = "|||||||||||||||||||||||||||
 |||||||||||||||||||||||||||
 |||||||||||||||||||||||||||"
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=796943006]
+[node name="Game" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=796943006]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 183.0
@@ -72,7 +82,7 @@ text = "/----------\\
 \\----------/"
 fit_content = true
 
-[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Label" unique_id=1488998315]
+[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Game/Label" unique_id=1488998315]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 26.0
@@ -82,17 +92,7 @@ bbcode_enabled = true
 text = "1234567890123456"
 fit_content = true
 
-[node name="Menu" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1140640963]
-layout_mode = 0
-offset_left = 254.0
-offset_top = 14.0
-offset_right = 339.0
-offset_bottom = 213.0
-theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
-bbcode_enabled = true
-fit_content = true
-
-[node name="Stats" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1984262044]
+[node name="Stats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=1984262044]
 layout_mode = 0
 offset_left = 183.0
 offset_top = 183.0
@@ -108,7 +108,7 @@ X----------X"
 fit_content = true
 horizontal_alignment = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Stats" unique_id=1938155772]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/Stats" unique_id=1938155772]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 13.0
@@ -120,7 +120,7 @@ DISC:
 "
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Stats" unique_id=1163530763]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Game/Stats" unique_id=1163530763]
 layout_mode = 0
 offset_left = 91.0
 offset_top = 13.0
@@ -128,19 +128,19 @@ offset_right = 131.0
 offset_bottom = 56.0
 theme_override_constants/separation = -4
 
-[node name="HP" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1540622527]
+[node name="HP" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1540622527]
 layout_mode = 2
 text = "000"
 
-[node name="Draw" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1306925801]
+[node name="Draw" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1306925801]
 layout_mode = 2
 text = "000"
 
-[node name="Discard" type="Label" parent="CanvasLayer/Control/Stats/VBoxContainer" unique_id=1423412272]
+[node name="Discard" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1423412272]
 layout_mode = 2
 text = "000"
 
-[node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=447798131]
+[node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=447798131]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 14.0
@@ -161,7 +161,7 @@ text = "X-----------------X
 X-----------------X"
 horizontal_alignment = 3
 
-[node name="RunStats" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=326261919]
+[node name="RunStats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=326261919]
 layout_mode = 0
 offset_left = 274.0
 offset_top = 14.0
@@ -181,21 +181,62 @@ text = "X---X
 
 X---X"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/RunStats" unique_id=1519447267]
+[node name="Label" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1519447267]
 layout_mode = 0
 offset_top = 26.0
 offset_right = 40.0
 offset_bottom = 43.0
-text = "ESC
-MENU"
+text = "PRESS
+ESC"
 
-[node name="Label2" type="Label" parent="CanvasLayer/Control/RunStats" unique_id=1736524125]
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1736524125]
 layout_mode = 0
 offset_top = 65.0
 offset_right = 52.0
 offset_bottom = 95.0
-text = "RoUnD
-00000
+text = "DEPTH
+
 
 SCORE
-00000"
+"
+
+[node name="Depth" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=3276814]
+layout_mode = 0
+offset_top = 78.0
+offset_right = 65.0
+offset_bottom = 95.0
+text = "00000"
+
+[node name="Score" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=418993049]
+layout_mode = 0
+offset_top = 117.0
+offset_right = 65.0
+offset_bottom = 134.0
+text = "00000"
+
+[node name="Menu" type="Control" parent="CanvasLayer/Control" unique_id=829336518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/Menu" unique_id=1629410392]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 339.0
+offset_bottom = 252.0
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Terminal" type="VBoxContainer" parent="CanvasLayer/Control/Menu/ScrollContainer" unique_id=578057545]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+script = ExtResource("2_kln2b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=257596083]
