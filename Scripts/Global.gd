@@ -1,7 +1,14 @@
 extends Node
 
-signal key_pressed(name:String, echo:bool, power:bool)
-signal key_released(name:String, echo:bool, power:bool)
+# Request an animation from any AnimationBuses.
+@warning_ignore("unused_signal")
+signal request_animation(anim_name:String)
+
+## -- INPUT -- ##
+
+# Emitted when a key is pressed / released.
+signal key_pressed(key_name:String, echo:bool, power:bool)
+signal key_released(key_name:String, echo:bool, power:bool)
 
 ## Keys to be parsed seperately from the other keys.
 var power_keys := [

@@ -2,9 +2,77 @@
 
 [ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
 [ext_resource type="Script" uid="uid://bachjwacobdky" path="res://Scripts/Terminal.gd" id="2_kln2b"]
+[ext_resource type="Shader" uid="uid://bxj8hdarkcxvy" path="res://Shaders/Diagonal.gdshader" id="2_rgh2o"]
+[ext_resource type="Script" uid="uid://8svrh0x8xwnb" path="res://Scripts/AnimationBus.gd" id="3_kln2b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
+shader = ExtResource("2_rgh2o")
+shader_parameter/threshold = 0.0
+shader_parameter/round_amnt = Vector2(27, 20)
+
+[sub_resource type="Animation" id="Animation_kln2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:material:shader_parameter/threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rgh2o"]
+resource_name = "Start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:material:shader_parameter/threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbw6q"]
+_data = {
+&"RESET": SubResource("Animation_kln2b"),
+&"Start": SubResource("Animation_rgh2o")
+}
 
 [node name="Main" type="Node" unique_id=59777334]
 
@@ -59,7 +127,7 @@ text = "|||||||||||||||||||||||||||
 |||||||||||||||||||||||||||"
 
 [node name="Game" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
-visible = false
+material = SubResource("ShaderMaterial_pbw6q")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,6 +136,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=796943006]
+use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
 offset_top = 183.0
@@ -81,8 +150,10 @@ text = "/----------\\
 <[color=#00000000]||||||||||[/color]>
 \\----------/"
 fit_content = true
+visible_characters = 64
 
 [node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Game/Label" unique_id=1488998315]
+use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
 offset_top = 26.0
@@ -91,8 +162,10 @@ offset_bottom = 56.0
 bbcode_enabled = true
 text = "1234567890123456"
 fit_content = true
+visible_characters = 16
 
 [node name="Stats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=1984262044]
+use_parent_material = true
 layout_mode = 0
 offset_left = 183.0
 offset_top = 183.0
@@ -107,8 +180,10 @@ text = "X----------x
 X----------X"
 fit_content = true
 horizontal_alignment = 3
+visible_characters = 37
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/Stats" unique_id=1938155772]
+use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
 offset_top = 13.0
@@ -119,8 +194,11 @@ DRAW:
 DISC:
 "
 fit_content = true
+visible_characters = 14
+visible_ratio = 0.875
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Game/Stats" unique_id=1163530763]
+use_parent_material = true
 layout_mode = 0
 offset_left = 91.0
 offset_top = 13.0
@@ -129,18 +207,25 @@ offset_bottom = 56.0
 theme_override_constants/separation = -4
 
 [node name="HP" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1540622527]
+use_parent_material = true
 layout_mode = 2
 text = "000"
+visible_characters = 3
 
 [node name="Draw" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1306925801]
+use_parent_material = true
 layout_mode = 2
 text = "000"
+visible_characters = 3
 
 [node name="Discard" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1423412272]
+use_parent_material = true
 layout_mode = 2
 text = "000"
+visible_characters = 3
 
 [node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=447798131]
+use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
 offset_top = 14.0
@@ -160,8 +245,10 @@ text = "X-----------------X
 [ ]
 X-----------------X"
 horizontal_alignment = 3
+visible_characters = 79
 
 [node name="RunStats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=326261919]
+use_parent_material = true
 layout_mode = 0
 offset_left = 274.0
 offset_top = 14.0
@@ -182,6 +269,7 @@ text = "X---X
 X---X"
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1519447267]
+use_parent_material = true
 layout_mode = 0
 offset_top = 26.0
 offset_right = 40.0
@@ -190,6 +278,7 @@ text = "PRESS
 ESC"
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1736524125]
+use_parent_material = true
 layout_mode = 0
 offset_top = 65.0
 offset_right = 52.0
@@ -199,20 +288,26 @@ text = "DEPTH
 
 SCORE
 "
+visible_characters = 13
+visible_ratio = 0.9285714
 
 [node name="Depth" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=3276814]
+use_parent_material = true
 layout_mode = 0
 offset_top = 78.0
 offset_right = 65.0
 offset_bottom = 95.0
 text = "00000"
+visible_characters = 5
 
 [node name="Score" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=418993049]
+use_parent_material = true
 layout_mode = 0
 offset_top = 117.0
 offset_right = 65.0
 offset_bottom = 134.0
 text = "00000"
+visible_characters = 5
 
 [node name="Menu" type="Control" parent="CanvasLayer/Control" unique_id=829336518]
 layout_mode = 1
@@ -238,5 +333,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = -4
 script = ExtResource("2_kln2b")
+visible_characters = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=257596083]
+libraries/ = SubResource("AnimationLibrary_pbw6q")
+script = ExtResource("3_kln2b")

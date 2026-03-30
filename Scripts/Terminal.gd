@@ -5,6 +5,8 @@ class_name Terminal extends VBoxContainer
 var current_label:RichTextLabel
 var current_real_text := ""
 
+@export var visible_characters := -1
+
 @export var blink_speed := 1.0
 var timer := 0.0
 
@@ -14,12 +16,13 @@ var scroll:ScrollContainer
 func _ready() -> void:
 	Global.key_pressed.connect(_on_key_pressed)
 	on_enter()
+	print(current_label)
 	current_real_text = "PRESS ENTER"
+	print(current_real_text)
 	
 	var parent = get_parent()
 	if parent is ScrollContainer:
 		scroll = parent
-		
 
 func _process(delta: float) -> void:
 	current_label.text = current_real_text.replace(" ", "[color=#00000000]|[/color]")
@@ -32,6 +35,10 @@ func _process(delta: float) -> void:
 	
 	if scroll:
 		scroll.scroll_vertical += 100
+	
+	for child in get_children():
+		if child is RichTextLabel:
+			child.visible_characters = visible_characters
 
 func _on_key_pressed(key_name:String, _echo:bool, power:bool): if focused:
 	
@@ -55,6 +62,7 @@ func on_enter() -> void:
 		current_label.text = current_real_text.replace(" ", "[color=#00000000]|[/color]")
 		
 		if len(current_real_text) == 0:
+			print("freed D:")
 			current_label.queue_free()
 		else:
 			parse_command(current_real_text)
@@ -64,6 +72,7 @@ func on_enter() -> void:
 	current_label.fit_content = true
 	
 	current_label.custom_minimum_size.y = 17
+	#current_label.use_parent_material = true
 	
 	current_real_text = ""
 	
@@ -71,9 +80,9 @@ func on_enter() -> void:
 
 func parse_command(command:String):
 	
+	## Allow semicolon seperated commands, like clear;help to do both.
 	if command.contains(";"):
 		for subcommand in command.split(";"):
-			print(subcommand)
 			parse_command(subcommand)
 		return
 	
@@ -81,6 +90,8 @@ func parse_command(command:String):
 		"": return
 		"CLEAR":
 			for child in get_children(): child.queue_free()
+		"START":
+			Global.request_animation.emit("Start")
 		"QUIT":
 			get_tree().quit()
 		"HELP":
@@ -107,6 +118,7 @@ func push_text(string:String):
 	new.fit_content = true
 	
 	new.custom_minimum_size.y = 17
+	#new.use_parent_material = true
 	
 	new.text = string
 	new.text = new.text.replace(" ", "[color=#00000000]|[/color]")
