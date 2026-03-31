@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://0g1y7q7netdc"]
+
+[ext_resource type="Script" uid="uid://c1la8ephjxdcs" path="res://Scripts/Letters/Letter.gd" id="1_8f7er"]
+[ext_resource type="Script" uid="uid://c82828jc0ndq" path="res://Scripts/Character.gd" id="2_8f7er"]
+[ext_resource type="Script" uid="uid://bbbgjg7ihit7d" path="res://Scripts/Letters/A.gd" id="2_w5742"]
+
+[sub_resource type="Resource" id="Resource_rcsle"]
+script = ExtResource("2_w5742")
+metadata/_custom_type_script = "uid://bbbgjg7ihit7d"
+
+[sub_resource type="Resource" id="Resource_1shsi"]
+script = ExtResource("2_w5742")
+metadata/_custom_type_script = "uid://bbbgjg7ihit7d"
+
+[sub_resource type="Resource" id="Resource_58d5o"]
+script = ExtResource("2_w5742")
+metadata/_custom_type_script = "uid://bbbgjg7ihit7d"
+
+[resource]
+script = ExtResource("2_8f7er")
+name = &"YOU"
+hand_size = 16
+reserve_deck = Array[ExtResource("1_8f7er")]([SubResource("Resource_rcsle"), SubResource("Resource_1shsi"), SubResource("Resource_58d5o")])
+metadata/_custom_type_script = "uid://c82828jc0ndq"

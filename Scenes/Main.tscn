@@ -1,20 +1,15 @@
 [gd_scene format=3 uid="uid://by6wuphdptep"]
 
 [ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
+[ext_resource type="Script" uid="uid://bbomgtnqgmtcd" path="res://Scripts/Overlay.gd" id="2_jw32o"]
 [ext_resource type="Shader" uid="uid://bxj8hdarkcxvy" path="res://Shaders/Diagonal.gdshader" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://8svrh0x8xwnb" path="res://Scripts/AnimationBus.gd" id="3_kln2b"]
-[ext_resource type="Script" uid="uid://gmp0udd3u1fu" path="res://Scripts/GameHandler.gd" id="3_pbw6q"]
+[ext_resource type="Script" uid="uid://gmp0udd3u1fu" path="res://Scripts/CombatHandler.gd" id="3_pbw6q"]
 [ext_resource type="Script" uid="uid://cjbqqvcxcvily" path="res://Scripts/MainMenu.gd" id="4_v1gob"]
 [ext_resource type="Script" uid="uid://dhgs6px2un6hm" path="res://Scripts/PauseMenu.gd" id="5_v1gob"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
-shader = ExtResource("2_rgh2o")
-shader_parameter/threshold = 1.0
-shader_parameter/over = false
-shader_parameter/round_amnt = Vector2(27, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rgh2o"]
 shader = ExtResource("2_rgh2o")
@@ -34,7 +29,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/0/path = NodePath("Combat:material:shader_parameter/threshold")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +65,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Game:focused")
+tracks/3/path = NodePath("Combat:focused")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -97,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/1/path = NodePath("Combat:material:shader_parameter/threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -121,7 +116,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Game:focused")
+tracks/3/path = NodePath("Combat:focused")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -173,7 +168,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/1/path = NodePath("Combat:material:shader_parameter/threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -185,7 +180,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Game:focused")
+tracks/2/path = NodePath("Combat:focused")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -225,7 +220,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Game:focused")
+tracks/1/path = NodePath("Combat:focused")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -237,7 +232,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/2/path = NodePath("Combat:material:shader_parameter/threshold")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -271,6 +266,14 @@ _data = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1660707798]
 
+[node name="Backdrop" type="Panel" parent="CanvasLayer" unique_id=1923751320]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r150o")
+
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1815237079]
 layout_mode = 3
 anchors_preset = 15
@@ -279,18 +282,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_r150o")
+script = ExtResource("2_jw32o")
 
-[node name="Backdrop" type="Panel" parent="CanvasLayer/Control" unique_id=1923751320]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_r150o")
-
-[node name="Text" type="Label" parent="CanvasLayer/Control/Backdrop" unique_id=218249657]
-modulate = Color(1, 1, 1, 0.07058824)
+[node name="Text" type="Label" parent="CanvasLayer/Control" unique_id=218249657]
+modulate = Color(1, 1, 1, 0.13333334)
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -319,8 +314,7 @@ text = "|||||||||||||||||||||||||||
 |||||||||||||||||||||||||||
 |||||||||||||||||||||||||||"
 
-[node name="Game" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
-material = SubResource("ShaderMaterial_pbw6q")
+[node name="Combat" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,7 +323,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_pbw6q")
 
-[node name="BottomLeftBox" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=796943006]
+[node name="BottomLeftBox" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=796943006]
 use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
@@ -346,13 +340,7 @@ text = "/----------\\
 fit_content = true
 visible_characters = 64
 
-[node name="HandDisplay" type="Control" parent="CanvasLayer/Control/Game/BottomLeftBox" unique_id=1758278229]
-use_parent_material = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HandLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomLeftBox/HandDisplay" unique_id=595729632]
+[node name="HandLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomLeftBox" unique_id=595729632]
 use_parent_material = true
 layout_mode = 1
 offset_left = 52.0
@@ -364,8 +352,10 @@ bbcode_enabled = true
 text = "HAND"
 fit_content = true
 visible_characters = 64
+visible_ratio = 16.0
 
-[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomLeftBox/HandDisplay" unique_id=1488998315]
+[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomLeftBox" unique_id=1488998315]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
@@ -377,7 +367,7 @@ text = "1234567890123456"
 fit_content = true
 visible_characters = 16
 
-[node name="BottomRightBox" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=1984262044]
+[node name="BottomRightBox" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=1984262044]
 use_parent_material = true
 layout_mode = 0
 offset_left = 183.0
@@ -395,16 +385,7 @@ fit_content = true
 horizontal_alignment = 3
 visible_characters = 37
 
-[node name="CombatStats" type="Control" parent="CanvasLayer/Control/Game/BottomRightBox" unique_id=866604476]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats" unique_id=1938155772]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomRightBox" unique_id=1938155772]
 use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
@@ -419,7 +400,7 @@ fit_content = true
 visible_characters = 14
 visible_ratio = 0.875
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats" unique_id=1163530763]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Combat/BottomRightBox" unique_id=1163530763]
 use_parent_material = true
 layout_mode = 0
 offset_left = 91.0
@@ -428,25 +409,28 @@ offset_right = 131.0
 offset_bottom = 56.0
 theme_override_constants/separation = -4
 
-[node name="HP" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1540622527]
+[node name="HP" type="Label" parent="CanvasLayer/Control/Combat/BottomRightBox/VBoxContainer" unique_id=1540622527]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
 
-[node name="Draw" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1306925801]
+[node name="Draw" type="Label" parent="CanvasLayer/Control/Combat/BottomRightBox/VBoxContainer" unique_id=1306925801]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
 
-[node name="Discard" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1423412272]
+[node name="Discard" type="Label" parent="CanvasLayer/Control/Combat/BottomRightBox/VBoxContainer" unique_id=1423412272]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
 
-[node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=447798131]
+[node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=447798131]
 use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
@@ -469,7 +453,39 @@ X-----------------X"
 horizontal_alignment = 3
 visible_characters = 79
 
-[node name="TopRight" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=326261919]
+[node name="Ground" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1784540510]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 91.0
+offset_right = 221.0
+offset_bottom = 108.0
+bbcode_enabled = true
+text = "---------------"
+fit_content = true
+
+[node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=2004395033]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 39.0
+offset_top = 78.0
+offset_right = 131.0
+offset_bottom = 95.0
+bbcode_enabled = true
+text = "YOU"
+fit_content = true
+
+[node name="Enemy" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1209441624]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 78.0
+offset_right = 209.0
+offset_bottom = 95.0
+bbcode_enabled = true
+text = "RAT"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="TopRight" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=326261919]
 use_parent_material = true
 layout_mode = 0
 offset_left = 274.0
@@ -490,7 +506,7 @@ text = "X---X
 
 X---X"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Game/TopRight" unique_id=1519447267]
+[node name="Label" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=1519447267]
 use_parent_material = true
 layout_mode = 0
 offset_top = 26.0
@@ -499,13 +515,7 @@ offset_bottom = 43.0
 text = "PRESS
 ESC"
 
-[node name="CombatStats" type="Control" parent="CanvasLayer/Control/Game/TopRight" unique_id=850048846]
-use_parent_material = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=1736524125]
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=1736524125]
 use_parent_material = true
 layout_mode = 0
 offset_top = 65.0
@@ -519,7 +529,7 @@ MONEY
 visible_characters = 13
 visible_ratio = 0.9285714
 
-[node name="Depth" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=3276814]
+[node name="Depth" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=3276814]
 use_parent_material = true
 layout_mode = 0
 offset_top = 78.0
@@ -528,7 +538,7 @@ offset_bottom = 95.0
 text = "00000"
 visible_characters = 5
 
-[node name="Coin" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=418993049]
+[node name="Coin" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=418993049]
 use_parent_material = true
 layout_mode = 0
 offset_top = 117.0
@@ -538,6 +548,7 @@ text = "00000"
 visible_characters = 5
 
 [node name="Menu" type="Control" parent="CanvasLayer/Control" unique_id=829336518]
+visible = false
 material = SubResource("ShaderMaterial_rgh2o")
 layout_mode = 1
 anchors_preset = 15
@@ -575,6 +586,7 @@ offset_bottom = 31.0
 text = "GAME_NAME"
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer/Control" unique_id=1599091328]
+visible = false
 material = SubResource("ShaderMaterial_jw32o")
 layout_mode = 1
 anchors_preset = 15

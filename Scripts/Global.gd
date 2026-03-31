@@ -1,8 +1,29 @@
 extends Node
 
+## -- REQUESTS -- ##
+
 # Request an animation from any AnimationBuses.
 @warning_ignore("unused_signal")
 signal request_animation(anim_name:String)
+
+# Request some camera shake from the Overlay.
+@warning_ignore("unused_signal")
+signal request_camera_shake(amount:Vector2, time:float)
+
+func as_digital_string(from:int, digits:int) -> String:
+	
+	var from_str := str(from)
+	
+	var response:String = ""
+	
+	for i in range(digits - len(from_str)):
+		response += "0"
+	
+	return response + from_str
+
+## -- PLAYER -- ##
+
+@onready var player := preload("res://Assets/Player.tres")
 
 ## -- INPUT -- ##
 
@@ -39,10 +60,6 @@ var special_keys := {
 	"Period": ".",
 	"Comma": ","
 }
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed(): # Bus all key presses into key_pressed and key_released.
