@@ -10,3 +10,4 @@ Label/constants/line_spacing = -4
 Label/fonts/font = SubResource("FontVariation_gu0d2")
 RichTextLabel/constants/line_separation = -4
 RichTextLabel/fonts/normal_font = ExtResource("1_gu0d2")
+VBoxContainer/constants/separation = -4

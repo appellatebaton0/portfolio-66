@@ -1,17 +1,84 @@
 [gd_scene format=3 uid="uid://by6wuphdptep"]
 
 [ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
-[ext_resource type="Script" uid="uid://bachjwacobdky" path="res://Scripts/Terminal.gd" id="2_kln2b"]
 [ext_resource type="Shader" uid="uid://bxj8hdarkcxvy" path="res://Shaders/Diagonal.gdshader" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://8svrh0x8xwnb" path="res://Scripts/AnimationBus.gd" id="3_kln2b"]
+[ext_resource type="Script" uid="uid://gmp0udd3u1fu" path="res://Scripts/GameHandler.gd" id="3_pbw6q"]
+[ext_resource type="Script" uid="uid://cjbqqvcxcvily" path="res://Scripts/MainMenu.gd" id="4_v1gob"]
+[ext_resource type="Script" uid="uid://dhgs6px2un6hm" path="res://Scripts/PauseMenu.gd" id="5_v1gob"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
 shader = ExtResource("2_rgh2o")
-shader_parameter/threshold = 0.0
+shader_parameter/threshold = 1.0
+shader_parameter/over = false
 shader_parameter/round_amnt = Vector2(27, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgh2o"]
+shader = ExtResource("2_rgh2o")
+shader_parameter/threshold = 1.0
+shader_parameter/over = true
+shader_parameter/round_amnt = Vector2(27, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jw32o"]
+shader = ExtResource("2_rgh2o")
+shader_parameter/threshold = 0.0
+shader_parameter/over = true
+shader_parameter/round_amnt = Vector2(27, 20)
+
+[sub_resource type="Animation" id="Animation_50glp"]
+resource_name = "Pause"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:material:shader_parameter/threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseMenu/ScrollContainer/Terminal:focused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Game:focused")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_kln2b"]
 length = 0.001
@@ -37,12 +104,60 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseMenu:material:shader_parameter/threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Game:focused")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Menu/ScrollContainer/Terminal:focused")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PauseMenu/ScrollContainer/Terminal:focused")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_rgh2o"]
 resource_name = "Start"
-length = 2.0
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,7 +165,7 @@ tracks/0/path = NodePath("Menu:material:shader_parameter/threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -62,16 +177,94 @@ tracks/1/path = NodePath("Game:material:shader_parameter/threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1, 2),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 1.0]
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game:focused")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Menu/ScrollContainer/Terminal:focused")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v1gob"]
+resource_name = "Unpause"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu/ScrollContainer/Terminal:focused")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Game:focused")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game:material:shader_parameter/threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PauseMenu:material:shader_parameter/threshold")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pbw6q"]
 _data = {
+&"Pause": SubResource("Animation_50glp"),
 &"RESET": SubResource("Animation_kln2b"),
-&"Start": SubResource("Animation_rgh2o")
+&"Start": SubResource("Animation_rgh2o"),
+&"Unpause": SubResource("Animation_v1gob")
 }
 
 [node name="Main" type="Node" unique_id=59777334]
@@ -87,7 +280,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_r150o")
 
-[node name="Backdrop2" type="Panel" parent="CanvasLayer/Control" unique_id=1923751320]
+[node name="Backdrop" type="Panel" parent="CanvasLayer/Control" unique_id=1923751320]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,7 +289,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r150o")
 
-[node name="Text" type="Label" parent="CanvasLayer/Control/Backdrop2" unique_id=218249657]
+[node name="Text" type="Label" parent="CanvasLayer/Control/Backdrop" unique_id=218249657]
 modulate = Color(1, 1, 1, 0.07058824)
 layout_mode = 0
 offset_left = 1.0
@@ -134,8 +327,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_pbw6q")
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=796943006]
+[node name="BottomLeftBox" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=796943006]
 use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
@@ -145,14 +339,33 @@ offset_bottom = 252.0
 theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
 bbcode_enabled = true
 text = "/----------\\
-<[color=#00000000]|||[/color]HAND[color=#00000000]|}|[/color]>
+<[color=#00000000]||||||||||[/color]>
 <[color=#00000000]||||||||||[/color]>
 <[color=#00000000]||||||||||[/color]>
 \\----------/"
 fit_content = true
 visible_characters = 64
 
-[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Game/Label" unique_id=1488998315]
+[node name="HandDisplay" type="Control" parent="CanvasLayer/Control/Game/BottomLeftBox" unique_id=1758278229]
+use_parent_material = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HandLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomLeftBox/HandDisplay" unique_id=595729632]
+use_parent_material = true
+layout_mode = 1
+offset_left = 52.0
+offset_top = 13.0
+offset_right = 104.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0.6235599, 0.62355983, 0.62355983, 1)
+bbcode_enabled = true
+text = "HAND"
+fit_content = true
+visible_characters = 64
+
+[node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomLeftBox/HandDisplay" unique_id=1488998315]
 use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
@@ -164,7 +377,7 @@ text = "1234567890123456"
 fit_content = true
 visible_characters = 16
 
-[node name="Stats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=1984262044]
+[node name="BottomRightBox" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=1984262044]
 use_parent_material = true
 layout_mode = 0
 offset_left = 183.0
@@ -182,7 +395,16 @@ fit_content = true
 horizontal_alignment = 3
 visible_characters = 37
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/Stats" unique_id=1938155772]
+[node name="CombatStats" type="Control" parent="CanvasLayer/Control/Game/BottomRightBox" unique_id=866604476]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats" unique_id=1938155772]
 use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
@@ -197,7 +419,7 @@ fit_content = true
 visible_characters = 14
 visible_ratio = 0.875
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Game/Stats" unique_id=1163530763]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats" unique_id=1163530763]
 use_parent_material = true
 layout_mode = 0
 offset_left = 91.0
@@ -206,19 +428,19 @@ offset_right = 131.0
 offset_bottom = 56.0
 theme_override_constants/separation = -4
 
-[node name="HP" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1540622527]
+[node name="HP" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1540622527]
 use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
 
-[node name="Draw" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1306925801]
+[node name="Draw" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1306925801]
 use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
 
-[node name="Discard" type="Label" parent="CanvasLayer/Control/Game/Stats/VBoxContainer" unique_id=1423412272]
+[node name="Discard" type="Label" parent="CanvasLayer/Control/Game/BottomRightBox/CombatStats/VBoxContainer" unique_id=1423412272]
 use_parent_material = true
 layout_mode = 2
 text = "000"
@@ -247,7 +469,7 @@ X-----------------X"
 horizontal_alignment = 3
 visible_characters = 79
 
-[node name="RunStats" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=326261919]
+[node name="TopRight" type="RichTextLabel" parent="CanvasLayer/Control/Game" unique_id=326261919]
 use_parent_material = true
 layout_mode = 0
 offset_left = 274.0
@@ -268,7 +490,7 @@ text = "X---X
 
 X---X"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1519447267]
+[node name="Label" type="Label" parent="CanvasLayer/Control/Game/TopRight" unique_id=1519447267]
 use_parent_material = true
 layout_mode = 0
 offset_top = 26.0
@@ -277,21 +499,27 @@ offset_bottom = 43.0
 text = "PRESS
 ESC"
 
-[node name="Label2" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=1736524125]
+[node name="CombatStats" type="Control" parent="CanvasLayer/Control/Game/TopRight" unique_id=850048846]
+use_parent_material = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=1736524125]
 use_parent_material = true
 layout_mode = 0
 offset_top = 65.0
-offset_right = 52.0
-offset_bottom = 95.0
+offset_right = 65.0
+offset_bottom = 121.0
 text = "DEPTH
 
 
-SCORE
+MONEY
 "
 visible_characters = 13
 visible_ratio = 0.9285714
 
-[node name="Depth" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=3276814]
+[node name="Depth" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=3276814]
 use_parent_material = true
 layout_mode = 0
 offset_top = 78.0
@@ -300,7 +528,7 @@ offset_bottom = 95.0
 text = "00000"
 visible_characters = 5
 
-[node name="Score" type="Label" parent="CanvasLayer/Control/Game/RunStats" unique_id=418993049]
+[node name="Coin" type="Label" parent="CanvasLayer/Control/Game/TopRight/CombatStats" unique_id=418993049]
 use_parent_material = true
 layout_mode = 0
 offset_top = 117.0
@@ -310,6 +538,7 @@ text = "00000"
 visible_characters = 5
 
 [node name="Menu" type="Control" parent="CanvasLayer/Control" unique_id=829336518]
+material = SubResource("ShaderMaterial_rgh2o")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -318,9 +547,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/Menu" unique_id=1629410392]
+use_parent_material = true
 layout_mode = 0
 offset_left = 14.0
-offset_top = 14.0
+offset_top = 40.0
 offset_right = 339.0
 offset_bottom = 252.0
 mouse_filter = 2
@@ -328,12 +558,58 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
 [node name="Terminal" type="VBoxContainer" parent="CanvasLayer/Control/Menu/ScrollContainer" unique_id=578057545]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = -4
-script = ExtResource("2_kln2b")
-visible_characters = 0
+script = ExtResource("4_v1gob")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Menu" unique_id=1420443717]
+use_parent_material = true
+layout_mode = 0
+offset_left = 118.0
+offset_top = 14.0
+offset_right = 235.0
+offset_bottom = 31.0
+text = "GAME_NAME"
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer/Control" unique_id=1599091328]
+material = SubResource("ShaderMaterial_jw32o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/PauseMenu" unique_id=1240128116]
+use_parent_material = true
+layout_mode = 0
+offset_left = 105.0
+offset_top = 14.0
+offset_right = 248.0
+offset_bottom = 31.0
+text = "GAME_PAUSED"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/PauseMenu" unique_id=943643017]
+use_parent_material = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = 40.0
+offset_right = 340.0
+offset_bottom = 249.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="Terminal" type="VBoxContainer" parent="CanvasLayer/Control/PauseMenu/ScrollContainer" unique_id=270938965]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -4
+script = ExtResource("5_v1gob")
+focused = false
+start_command = "HELP"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=257596083]
 libraries/ = SubResource("AnimationLibrary_pbw6q")
