@@ -11,15 +11,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		_on_shake_requested(Vector2(1.0, 1.0), 0.2)
-	
 	if shake_time > 0.0:
 		shake_time = move_toward(shake_time, 0, delta)
 		
 		position = get_shake()
 	else:
 		position = Vector2.ZERO
+	
+	## DEBUG, SO I CAN MAKE SCREENS INVISIBLE
+	#for child in get_children(): if child is Control: child.show()
 
 func _on_shake_requested(amount:Vector2, time:float):
 	shake_amount = amount

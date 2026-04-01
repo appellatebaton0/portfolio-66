@@ -7,9 +7,16 @@
 [ext_resource type="Script" uid="uid://gmp0udd3u1fu" path="res://Scripts/CombatHandler.gd" id="3_pbw6q"]
 [ext_resource type="Script" uid="uid://cjbqqvcxcvily" path="res://Scripts/MainMenu.gd" id="4_v1gob"]
 [ext_resource type="Script" uid="uid://dhgs6px2un6hm" path="res://Scripts/PauseMenu.gd" id="5_v1gob"]
+[ext_resource type="Script" uid="uid://cyr45h1wy41mh" path="res://Scripts/NextRoomHandler.gd" id="7_50glp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
+shader = ExtResource("2_rgh2o")
+shader_parameter/threshold = 1.0
+shader_parameter/over = false
+shader_parameter/round_amnt = Vector2(27, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rgh2o"]
 shader = ExtResource("2_rgh2o")
@@ -285,7 +292,7 @@ theme = ExtResource("1_r150o")
 script = ExtResource("2_jw32o")
 
 [node name="Text" type="Label" parent="CanvasLayer/Control" unique_id=218249657]
-modulate = Color(1, 1, 1, 0.13333334)
+modulate = Color(1, 1, 1, 0.08235294)
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -315,6 +322,8 @@ text = "|||||||||||||||||||||||||||
 |||||||||||||||||||||||||||"
 
 [node name="Combat" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
+visible = false
+material = SubResource("ShaderMaterial_50glp")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -454,6 +463,7 @@ horizontal_alignment = 3
 visible_characters = 79
 
 [node name="Ground" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1784540510]
+use_parent_material = true
 layout_mode = 0
 offset_left = 26.0
 offset_top = 91.0
@@ -465,6 +475,7 @@ fit_content = true
 
 [node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=2004395033]
 unique_name_in_owner = true
+use_parent_material = true
 layout_mode = 0
 offset_left = 39.0
 offset_top = 78.0
@@ -474,7 +485,9 @@ bbcode_enabled = true
 text = "YOU"
 fit_content = true
 
-[node name="Enemy" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1209441624]
+[node name="EnemyLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1209441624]
+unique_name_in_owner = true
+use_parent_material = true
 layout_mode = 0
 offset_left = 131.0
 offset_top = 78.0
@@ -622,6 +635,99 @@ theme_override_constants/separation = -4
 script = ExtResource("5_v1gob")
 focused = false
 start_command = "HELP"
+
+[node name="NextRoom" type="Control" parent="CanvasLayer/Control" unique_id=25219358]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_50glp")
+
+[node name="RoomOp" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1678572665]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 40.0
+offset_right = 326.59
+offset_bottom = 122.0
+text = "X----------------------X
+[ ]
+[ ]
+[ ]
+[ ]
+"
+horizontal_alignment = 3
+
+[node name="RoomOp4" type="RichTextLabel" parent="CanvasLayer/Control/NextRoom" unique_id=769744992]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 14.0
+offset_right = 274.0
+offset_bottom = 31.0
+bbcode_enabled = true
+text = "PICK[color=#000000]|[/color]NEXT[color=#000000]|[/color]ROOM"
+fit_content = true
+
+[node name="RoomOp2" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1736613879]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 105.0
+offset_right = 326.59
+offset_bottom = 187.0
+text = "X----------------------X
+[ ]
+[ ]
+[ ]
+[ ]
+"
+horizontal_alignment = 3
+
+[node name="RoomOp3" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1303149377]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 170.0
+offset_right = 326.59
+offset_bottom = 252.0
+text = "X----------------------X
+[ ]
+[ ]
+[ ]
+[ ]
+X----------------------X"
+horizontal_alignment = 3
+
+[node name="OptionIndicators" type="Control" parent="CanvasLayer/Control/NextRoom" unique_id=750416565]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+
+[node name="OptionIndicator" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=1713342691]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 66.0
+offset_right = 367.0
+offset_bottom = 96.0
+text = "/
+\\"
+
+[node name="OptionIndicator2" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=86300254]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 131.0
+offset_right = 367.0
+offset_bottom = 161.0
+text = "/
+\\"
+
+[node name="OptionIndicator3" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=1637592803]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 196.0
+offset_right = 367.0
+offset_bottom = 226.0
+text = "/
+\\"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=257596083]
 libraries/ = SubResource("AnimationLibrary_pbw6q")
