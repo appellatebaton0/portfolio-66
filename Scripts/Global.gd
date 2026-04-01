@@ -25,6 +25,12 @@ func as_digital_string(from:int, digits:int) -> String:
 
 @onready var player := preload("res://Assets/Player.tres")
 
+signal theme_changed
+var theme_config:ThemeConfig = preload("res://Assets/ThemeConfigs/Moonlight.tres"):
+	set(to):
+		theme_config = to
+		theme_changed.emit()
+
 ## -- INPUT -- ##
 
 # Emitted when a key is pressed / released.

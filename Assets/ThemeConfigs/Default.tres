@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ThemeConfig" format=3 uid="uid://72uwmoxaxq53"]
+
+[ext_resource type="Script" uid="uid://buivchtp0vgnp" path="res://Scripts/ThemeConfig.gd" id="1_dptpr"]
+
+[resource]
+script = ExtResource("1_dptpr")
+backdrop_font_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+default_text_color = Color(1, 1, 1, 1)
+lesser_text_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
+health_color_low = Color(0.99999994, 0.1943762, 0.14415294, 1)
+health_color_med = Color(1, 0.40784314, 0.13333334, 1)
+health_color_hig = Color(0, 0.756737, 2.3102762e-06, 1)
+metadata/_custom_type_script = "uid://buivchtp0vgnp"

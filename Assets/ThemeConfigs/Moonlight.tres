@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ThemeConfig" format=3 uid="uid://douwvpxu3cgql"]
+
+[ext_resource type="Script" uid="uid://buivchtp0vgnp" path="res://Scripts/ThemeConfig.gd" id="1_tc4aq"]
+
+[resource]
+script = ExtResource("1_tc4aq")
+backdrop_color = Color(0.04583335, 0, 0.25, 1)
+backdrop_font_color = Color(1, 1, 1, 0.53333336)
+default_text_color = Color(0.7305, 0.66999996, 1, 1)
+lesser_text_color = Color(0.31199998, 0.31980005, 0.78, 1)
+metadata/_custom_type_script = "uid://buivchtp0vgnp"

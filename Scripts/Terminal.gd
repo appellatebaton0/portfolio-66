@@ -69,6 +69,7 @@ func on_enter() -> void:
 	
 	current_label.custom_minimum_size.y = 17
 	current_label.use_parent_material = true
+	current_label.add_theme_color_override("default_color", Global.theme_config.default_text_color)
 	
 	current_real_text = ""
 	
@@ -85,6 +86,7 @@ func push_text(string:String):
 	
 	new.text = string
 	new.text = new.text.replace(" ", "[color=#00000000]|[/color]")
+	new.add_theme_color_override("default_color", Global.theme_config.default_text_color)
 	
 	add_child(new)
 

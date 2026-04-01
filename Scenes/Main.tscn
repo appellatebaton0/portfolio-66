@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://by6wuphdptep"]
 
 [ext_resource type="Theme" uid="uid://di3vsjt4ml06e" path="res://Assets/MainTheme.tres" id="1_r150o"]
+[ext_resource type="Script" uid="uid://c6gian77dx8cf" path="res://Scripts/Backdrop.gd" id="1_vy5pj"]
 [ext_resource type="Script" uid="uid://bbomgtnqgmtcd" path="res://Scripts/Overlay.gd" id="2_jw32o"]
 [ext_resource type="Shader" uid="uid://bxj8hdarkcxvy" path="res://Shaders/Diagonal.gdshader" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://8svrh0x8xwnb" path="res://Scripts/AnimationBus.gd" id="3_kln2b"]
@@ -8,9 +9,6 @@
 [ext_resource type="Script" uid="uid://cjbqqvcxcvily" path="res://Scripts/MainMenu.gd" id="4_v1gob"]
 [ext_resource type="Script" uid="uid://dhgs6px2un6hm" path="res://Scripts/PauseMenu.gd" id="5_v1gob"]
 [ext_resource type="Script" uid="uid://cyr45h1wy41mh" path="res://Scripts/NextRoomHandler.gd" id="7_50glp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r150o"]
-bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
 shader = ExtResource("2_rgh2o")
@@ -273,13 +271,14 @@ _data = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1660707798]
 
-[node name="Backdrop" type="Panel" parent="CanvasLayer" unique_id=1923751320]
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer" unique_id=3861684]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_r150o")
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_vy5pj")
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1815237079]
 layout_mode = 3
@@ -320,6 +319,7 @@ text = "|||||||||||||||||||||||||||
 |||||||||||||||||||||||||||
 |||||||||||||||||||||||||||
 |||||||||||||||||||||||||||"
+metadata/theme_type = "backdrop_font_color"
 
 [node name="Combat" type="Control" parent="CanvasLayer/Control" unique_id=1308099658]
 visible = false
@@ -348,6 +348,7 @@ text = "/----------\\
 \\----------/"
 fit_content = true
 visible_characters = 64
+metadata/theme_type = "lesser_text_color"
 
 [node name="HandLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomLeftBox" unique_id=595729632]
 use_parent_material = true
@@ -362,6 +363,7 @@ text = "HAND"
 fit_content = true
 visible_characters = 64
 visible_ratio = 16.0
+metadata/theme_type = "lesser_text_color"
 
 [node name="Hand" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomLeftBox" unique_id=1488998315]
 unique_name_in_owner = true
@@ -375,6 +377,7 @@ bbcode_enabled = true
 text = "1234567890123456"
 fit_content = true
 visible_characters = 16
+metadata/theme_type = "default_text_color"
 
 [node name="BottomRightBox" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=1984262044]
 use_parent_material = true
@@ -393,6 +396,7 @@ X----------X"
 fit_content = true
 horizontal_alignment = 3
 visible_characters = 37
+metadata/theme_type = "lesser_text_color"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/BottomRightBox" unique_id=1938155772]
 use_parent_material = true
@@ -408,6 +412,7 @@ DISC:
 fit_content = true
 visible_characters = 14
 visible_ratio = 0.875
+metadata/theme_type = "default_text_color"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Combat/BottomRightBox" unique_id=1163530763]
 use_parent_material = true
@@ -424,6 +429,7 @@ use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
+metadata/theme_type = "default_text_color"
 
 [node name="Draw" type="Label" parent="CanvasLayer/Control/Combat/BottomRightBox/VBoxContainer" unique_id=1306925801]
 unique_name_in_owner = true
@@ -431,6 +437,7 @@ use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
+metadata/theme_type = "default_text_color"
 
 [node name="Discard" type="Label" parent="CanvasLayer/Control/Combat/BottomRightBox/VBoxContainer" unique_id=1423412272]
 unique_name_in_owner = true
@@ -438,6 +445,7 @@ use_parent_material = true
 layout_mode = 2
 text = "000"
 visible_characters = 3
+metadata/theme_type = "default_text_color"
 
 [node name="MainScreen" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=447798131]
 use_parent_material = true
@@ -461,6 +469,7 @@ text = "X-----------------X
 X-----------------X"
 horizontal_alignment = 3
 visible_characters = 79
+metadata/theme_type = "lesser_text_color"
 
 [node name="Ground" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1784540510]
 use_parent_material = true
@@ -472,6 +481,7 @@ offset_bottom = 108.0
 bbcode_enabled = true
 text = "---------------"
 fit_content = true
+metadata/theme_type = "default_text_color"
 
 [node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=2004395033]
 unique_name_in_owner = true
@@ -484,6 +494,7 @@ offset_bottom = 95.0
 bbcode_enabled = true
 text = "YOU"
 fit_content = true
+metadata/theme_type = "default_text_color"
 
 [node name="EnemyLabel" type="RichTextLabel" parent="CanvasLayer/Control/Combat/MainScreen" unique_id=1209441624]
 unique_name_in_owner = true
@@ -497,6 +508,7 @@ bbcode_enabled = true
 text = "RAT"
 fit_content = true
 horizontal_alignment = 2
+metadata/theme_type = "default_text_color"
 
 [node name="TopRight" type="RichTextLabel" parent="CanvasLayer/Control/Combat" unique_id=326261919]
 use_parent_material = true
@@ -518,6 +530,7 @@ text = "X---X
 
 
 X---X"
+metadata/theme_type = "lesser_text_color"
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=1519447267]
 use_parent_material = true
@@ -527,6 +540,7 @@ offset_right = 40.0
 offset_bottom = 43.0
 text = "PRESS
 ESC"
+metadata/theme_type = "default_text_color"
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=1736524125]
 use_parent_material = true
@@ -541,6 +555,7 @@ MONEY
 "
 visible_characters = 13
 visible_ratio = 0.9285714
+metadata/theme_type = "default_text_color"
 
 [node name="Depth" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=3276814]
 use_parent_material = true
@@ -550,6 +565,7 @@ offset_right = 65.0
 offset_bottom = 95.0
 text = "00000"
 visible_characters = 5
+metadata/theme_type = "default_text_color"
 
 [node name="Coin" type="Label" parent="CanvasLayer/Control/Combat/TopRight" unique_id=418993049]
 use_parent_material = true
@@ -559,6 +575,7 @@ offset_right = 65.0
 offset_bottom = 134.0
 text = "00000"
 visible_characters = 5
+metadata/theme_type = "default_text_color"
 
 [node name="Menu" type="Control" parent="CanvasLayer/Control" unique_id=829336518]
 visible = false
@@ -597,6 +614,7 @@ offset_top = 14.0
 offset_right = 235.0
 offset_bottom = 31.0
 text = "GAME_NAME"
+metadata/theme_type = "default_text_color"
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer/Control" unique_id=1599091328]
 visible = false
@@ -616,6 +634,7 @@ offset_top = 14.0
 offset_right = 248.0
 offset_bottom = 31.0
 text = "GAME_PAUSED"
+metadata/theme_type = "default_text_color"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/PauseMenu" unique_id=943643017]
 use_parent_material = true
@@ -645,21 +664,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_50glp")
 
-[node name="RoomOp" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1678572665]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 40.0
-offset_right = 326.59
-offset_bottom = 122.0
-text = "X----------------------X
-[ ]
-[ ]
-[ ]
-[ ]
-"
-horizontal_alignment = 3
-
-[node name="RoomOp4" type="RichTextLabel" parent="CanvasLayer/Control/NextRoom" unique_id=769744992]
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Control/NextRoom" unique_id=769744992]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 14.0
@@ -668,66 +673,210 @@ offset_bottom = 31.0
 bbcode_enabled = true
 text = "PICK[color=#000000]|[/color]NEXT[color=#000000]|[/color]ROOM"
 fit_content = true
+metadata/theme_type = "default_text_color"
 
-[node name="RoomOp2" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1736613879]
+[node name="RoomOp" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1678572665]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 105.0
-offset_right = 326.59
-offset_bottom = 187.0
-text = "X----------------------X
+offset_left = 27.0
+offset_top = 40.0
+offset_right = 235.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0.6603956, 0.66039556, 0.66039556, 1)
+text = "X--------------X
 [ ]
 [ ]
 [ ]
 [ ]
 "
 horizontal_alignment = 3
+metadata/theme_type = "lesser_text_color"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/NextRoom/RoomOp" unique_id=1928110437]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 26.0
+offset_right = 86.0
+offset_bottom = 43.0
+text = "TYPE:"
+metadata/theme_type = "default_text_color"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/NextRoom/RoomOp" unique_id=976056052]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 39.0
+offset_right = 91.0
+offset_bottom = 56.0
+text = "COMBAT"
+metadata/theme_type = "default_text_color"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/NextRoom/RoomOp" unique_id=1145288328]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 26.0
+offset_right = 182.0
+offset_bottom = 56.0
+text = "PRESS
+1"
+horizontal_alignment = 1
+metadata/theme_type = "default_text_color"
+
+[node name="RoomOp2" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1736613879]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 105.0
+offset_right = 235.0
+offset_bottom = 187.0
+theme_override_colors/font_color = Color(0.6603956, 0.66039556, 0.66039556, 1)
+text = "X--------------X
+[ ]
+[ ]
+[ ]
+[ ]
+"
+horizontal_alignment = 3
+metadata/theme_type = "lesser_text_color"
 
 [node name="RoomOp3" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1303149377]
 layout_mode = 0
-offset_left = 14.0
+offset_left = 27.0
 offset_top = 170.0
-offset_right = 326.59
+offset_right = 235.0
 offset_bottom = 252.0
-text = "X----------------------X
+theme_override_colors/font_color = Color(0.6603956, 0.66039556, 0.66039556, 1)
+text = "X--------------X
 [ ]
 [ ]
 [ ]
 [ ]
-X----------------------X"
+X--------------X"
 horizontal_alignment = 3
+metadata/theme_type = "lesser_text_color"
 
 [node name="OptionIndicators" type="Control" parent="CanvasLayer/Control/NextRoom" unique_id=750416565]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
+offset_left = 14.0
+offset_top = 145.0
+offset_right = 14.0
+offset_bottom = 145.0
 
 [node name="OptionIndicator" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=1713342691]
 layout_mode = 0
-offset_left = 327.0
-offset_top = 66.0
-offset_right = 367.0
-offset_bottom = 96.0
-text = "/
-\\"
+offset_top = -79.0
+offset_right = 13.0
+offset_bottom = -49.0
+text = "\\
+/"
+metadata/theme_type = "default_text_color"
 
 [node name="OptionIndicator2" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=86300254]
 layout_mode = 0
-offset_left = 327.0
-offset_top = 131.0
-offset_right = 367.0
-offset_bottom = 161.0
-text = "/
-\\"
+offset_top = -14.0
+offset_right = 13.0
+offset_bottom = 16.0
+text = "\\
+/"
+metadata/theme_type = "default_text_color"
 
 [node name="OptionIndicator3" type="Label" parent="CanvasLayer/Control/NextRoom/OptionIndicators" unique_id=1637592803]
 layout_mode = 0
-offset_left = 327.0
-offset_top = 196.0
-offset_right = 367.0
-offset_bottom = 226.0
-text = "/
-\\"
+offset_top = 51.0
+offset_right = 13.0
+offset_bottom = 81.0
+text = "\\
+/"
+metadata/theme_type = "default_text_color"
+
+[node name="Stats" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=1373112873]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 40.0
+offset_right = 339.0
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
+text = "/-----\\
+
+
+
+
+
+
+
+\\-----/"
+metadata/theme_type = "lesser_text_color"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/NextRoom/Stats" unique_id=1651858243]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 26.0
+offset_right = 104.0
+offset_bottom = 43.0
+text = "HP:"
+metadata/theme_type = "default_text_color"
+
+[node name="Health" type="Label" parent="CanvasLayer/Control/NextRoom/Stats" unique_id=218230428]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 39.0
+offset_right = 66.0
+offset_bottom = 56.0
+text = "000"
+metadata/theme_type = "default_text_color"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/NextRoom/Stats" unique_id=783308801]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 65.0
+offset_right = 78.0
+offset_bottom = 82.0
+text = "MONEY"
+metadata/theme_type = "default_text_color"
+
+[node name="Money" type="Label" parent="CanvasLayer/Control/NextRoom/Stats" unique_id=1522861711]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 78.0
+offset_right = 78.0
+offset_bottom = 95.0
+text = "00000"
+autowrap_mode = 1
+metadata/theme_type = "default_text_color"
+
+[node name="History" type="Label" parent="CanvasLayer/Control/NextRoom" unique_id=274999575]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 170.0
+offset_right = 339.0
+offset_bottom = 291.0
+theme_override_colors/font_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
+text = "/-----\\
+
+
+
+
+\\-----/"
+metadata/theme_type = "lesser_text_color"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/NextRoom/History" unique_id=1235524214]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 26.0
+offset_right = 78.0
+offset_bottom = 56.0
+text = "DEPTH"
+autowrap_mode = 1
+metadata/theme_type = "default_text_color"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/NextRoom/History" unique_id=428577059]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 39.0
+offset_right = 78.0
+offset_bottom = 69.0
+text = "00000"
+autowrap_mode = 1
+metadata/theme_type = "default_text_color"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=257596083]
 libraries/ = SubResource("AnimationLibrary_pbw6q")
